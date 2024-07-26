@@ -51,10 +51,9 @@ async function onToggleAutoStart(v) {
 			</div>
 			<el-form-item label="截图识别:">
 				<HotkeyInput v-model="conf.screenshot_recognizer" />
-				<div class="item-tip">仅截图后识别文本内容，不进行翻译。</div>
 			</el-form-item>
-			<el-form-item label="识别结果窗口位置">
-				<ElSelect v-model="conf.win_position" placeholder="请选择翻译窗口的位置" style="width: 250px">
+			<el-form-item label="识别窗口位置">
+				<ElSelect v-model="conf.win_position" placeholder="请选择识别窗口的位置" style="width: 250px">
 					<ElOption label="屏幕右上角" value="right-top" />
 					<ElOption label="屏幕中间" value="center" />
 					<ElOption label="鼠标位置" value="mouse" />
