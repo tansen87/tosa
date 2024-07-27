@@ -53,7 +53,7 @@ function onActive(item: IMenu) {
 
 		<!-- menus sider -->
 		<aside data-tauri-drag-region
-			class="w-[210px] inline-block relative box-border flex-shrink-0 cursor-default p-4 h-full float-left text-[var(--n-text-color)] bg-[#DFDFE0]">
+			class="w-[180px] inline-block relative box-border flex-shrink-0 cursor-default p-4 h-full float-left text-[var(--n-text-color)] bg-[#DFDFE0]">
 			<div class="flex justify-center my-9" data-tauri-drag-region>
 				<div class="w-[80px]" data-tauri-drag-region>
 					<img src="/icon.png" data-tauri-drag-region />
@@ -73,7 +73,7 @@ function onActive(item: IMenu) {
 		<!-- active menu container -->
 		<Transition name="custom-classes" style="--animate-duration: 0.8s"
 			enter-active-class="animate__animated animate__backInRight">
-			<div v-if="activeMenu" style="width: calc(100% - 210px)"
+			<div v-if="activeMenu" style="width: calc(100% - 180px)"
 				class="float-left h-full bg-[#E4E4E4] overflow-hidden">
 				<!-- is show header -->
 				<template v-if="activeMenu.explain">

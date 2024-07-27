@@ -17,12 +17,7 @@ export async function initBackground() {
 		const model = await import('./Tauri')
 		base = new model.Tauri()
 	} catch {
-		try {
-			const model = await import('./Electron')
-			base = new model.Electron()
-		} catch {
-			throw new Error('No valid background found')
-		}
+		throw new Error('No valid background found')
 	}
 	await base.init()
 }

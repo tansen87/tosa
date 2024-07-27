@@ -10,26 +10,15 @@ import {
 } from '../Background'
 import { IConfiguration, configuration } from '../Configuration.ts'
 import { IDictResult } from '../types'
-import { CacheHelper } from '../CacheHelper.ts'
 import TargetView from './TargetView.vue'
 import { debug } from '../Logger'
 
 
 class Store {
-	private cache: CacheHelper
-
 	public text: Ref<string> = ref('')
-	public src: Ref<string> = ref('auto')
-	public target: Ref<string> = ref('zh_cn')
 
-	/** 是否正在识别语种 */
-	public isDetecting: Ref<boolean> = ref(false)
-	/** 是否正在翻译 */
-	public isTranslating: Ref<boolean> = ref(false)
 	/** 是否正在识别图片 */
 	public isRecogning: Ref<boolean> = ref(false)
-	/** 识别到的语种 */
-	public detect_language: Ref<string> = ref('')
 
 	public serviceEl: Map<string, InstanceType<typeof TargetView>> = new Map()
 
@@ -46,18 +35,12 @@ class Store {
 				case 'pinup':
 					setAlwaysOnTop(value)
 					return
-				case 'cache_max_count':
-					self.cache.max_count = value
-					return
-				case 'reserve_word':
-					self.cache.reserve_word = value
-					return
 			}
 		})
 
 		type IPayload = { base64: string }
 		await listen<IPayload>('ocr://clip', function(payload) {
-			if (self.isTranslating.value || self.isRecogning.value) return
+			if (self.isRecogning.value) return
 			const { base64 } = payload
 			self.ocrRecognize(base64, false)
 		})
@@ -78,7 +61,7 @@ class Store {
 
 	async clear() {
 		this.text.value = ''
-		this.detect_language.value = ''
+		// this.detect_language.value = ''
 		for (const [_key, target] of this.serviceEl) {
 			await target.clear()
 		}

@@ -51,22 +51,6 @@ pub fn get_or_string(key: &str, default_value: String) -> String {
     })
 }
 
-// pub fn get_or_array(key: &str) -> Vec<String> {
-//     get_config_with_default(key, Vec::new(), |v| {
-//         if let Some(array) = v.as_array() {
-//             // 将 Value 数组转换成 String 数组
-//             Some(
-//                 array
-//                     .iter()
-//                     .filter_map(|item| item.as_str().map(String::from))
-//                     .collect(),
-//             )
-//         } else {
-//             None
-//         }
-//     })
-// }
-
 pub fn is_first_run() -> bool {
     STORE.read().unwrap().is_empty()
 }

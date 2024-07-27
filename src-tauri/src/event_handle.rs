@@ -71,14 +71,6 @@ pub fn screenshot(name: &str) {
 }
 
 #[tauri::command]
-pub fn get_image_base64() -> Result<String, ()> {
-    let mut base64_guard = OCR_BASE64.lock().unwrap();
-    let base64 = base64_guard.clone();
-    *base64_guard = String::new();
-    Ok(base64)
-}
-
-#[tauri::command]
 pub async fn screenps(clip: String) -> String {
     let mut p = paddleocr::Ppocr::new(
         std::path::PathBuf::from("PaddleOCR-json/PaddleOCR-json.exe"),
@@ -146,24 +138,24 @@ pub fn handle_hotkey(name: String, key: String) {
     handlle_hotkey_name_event(name.as_str());
 }
 
-pub fn handle_ahk_event(line: String) {
-    if let Ok(v) = serde_json::from_str::<serde_json::Value>(&line.clone()) {
-        if let Some(action) = v.get("action") {
-            let action = action.as_str().unwrap();
-            if action == "not_running" {
-                AHK_STATE.store(false, std::sync::atomic::Ordering::SeqCst);
-                return;
-            }
-            if action == "running" {
-                AHK_STATE.store(true, std::sync::atomic::Ordering::SeqCst);
-                return;
-            }
-            handlle_hotkey_name_event(action);
-        }
-    }
-    debug!("ahk event: {}", line.clone());
-    emit_to(SETTING_LABEL, "ahk://event", line);
-}
+// pub fn handle_ahk_event(line: String) {
+//     if let Ok(v) = serde_json::from_str::<serde_json::Value>(&line.clone()) {
+//         if let Some(action) = v.get("action") {
+//             let action = action.as_str().unwrap();
+//             if action == "not_running" {
+//                 AHK_STATE.store(false, std::sync::atomic::Ordering::SeqCst);
+//                 return;
+//             }
+//             if action == "running" {
+//                 AHK_STATE.store(true, std::sync::atomic::Ordering::SeqCst);
+//                 return;
+//             }
+//             handlle_hotkey_name_event(action);
+//         }
+//     }
+//     debug!("ahk event: {}", line.clone());
+//     emit_to(SETTING_LABEL, "ahk://event", line);
+// }
 
 pub fn handle_config_change(key: String, value: serde_json::Value) {
     match key.as_str() {

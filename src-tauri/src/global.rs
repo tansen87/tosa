@@ -7,27 +7,6 @@ use std::{
     sync::{atomic::AtomicBool, Arc, Mutex, RwLock},
 };
 
-#[cfg(all(target_os = "windows", target_arch = "x86"))]
-const DLL_BYTES: &'static [u8] = include_bytes!("../ahkh2x32.dll");
-
-#[cfg(all(target_os = "windows", target_arch = "x86_64"))]
-const DLL_BYTES: &'static [u8] = include_bytes!("../ahkh2x64.dll");
-
-#[cfg(target_os = "windows")]
-pub fn wirte_ahk_dll() -> bool {
-    let dll_path = std::env::current_dir().unwrap().join("ahkh2.dll");
-    if !dll_path.exists() {
-        return match std::fs::write(dll_path, DLL_BYTES) {
-            Ok(_) => true,
-            Err(_) => false,
-        };
-    }
-    true
-}
-
-pub static SCRIPT_FILE_NAME: &str = "script.ahk";
-pub static DLL_FILE_NAME: &str = "ahkh2.dll";
-
 pub const SHOW_TRANSLATOR: &str = "show_translator";
 pub const SCREENSHOT_RECOGNIZER: &str = "screenshot_recognizer";
 
@@ -46,5 +25,4 @@ lazy_static::lazy_static! {
     pub static ref AHK_STATE: Arc<AtomicBool> = Arc::new(AtomicBool::new(false));
 
     pub static ref STORE: RwLock<HashMap<String, Value>> = RwLock::new(HashMap::new());
-    // pub static ref JIEBA: Mutex<jieba_rs::Jieba> = Mutex::new(jieba_rs::Jieba::new());
 }

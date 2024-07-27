@@ -3,7 +3,6 @@
     windows_subsystem = "windows"
 )]
 
-mod cmd;
 mod config;
 mod event_handle;
 mod global;
@@ -11,32 +10,10 @@ mod hotkey;
 mod tray;
 mod window;
 
-#[cfg(target_os = "windows")]
-mod ahk;
-#[cfg(target_os = "windows")]
-mod ahk_worker;
-
-use log::{debug, info};
+use log::info;
 use tauri::Manager;
 
 fn main() {
-    #[cfg(target_os = "windows")]
-    {
-        if !global::wirte_ahk_dll() {
-            println!("write dll error");
-            std::process::exit(1);
-        }
-        let args: Vec<String> = std::env::args().collect();
-        if args.contains(&"--hook".to_string()) {
-            // run ahk script
-            let last_arg = args.last().unwrap();
-            ahk_worker::run_ahk(
-                std::env::current_dir().unwrap(),
-                std::path::PathBuf::from(last_arg),
-            );
-            std::process::exit(1);
-        }
-    }
     tauri::Builder::default()
         .plugin(tauri_plugin_context_menu::init())
         .plugin(tauri_plugin_positioner::init())
@@ -68,15 +45,6 @@ fn main() {
             info!("init config store");
             config::init_config();
 
-            #[cfg(target_os = "windows")]
-            {
-                if !config::is_first_run() && config::get_or_bool("enable_ahk", false) {
-                    debug!("Run start ahk worker");
-                    std::thread::spawn(move || {
-                        ahk::start_worker_ahk();
-                    });
-                }
-            }
             tray::generate_tray(app.app_handle());
             hotkey::init_hotkey();
 
@@ -94,19 +62,10 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            cmd::set_proxy,
-            cmd::unset_proxy,
-            cmd::active_window_is_self,
             config::get_config,
             config::set_config_by_key,
-            ahk::read_script,
-            ahk::write_script,
-            ahk::start_autohotkey,
-            ahk::kill_autohotkey,
-            ahk::is_autohotkey_running,
             window::show_trans_win,
             window::show_setting_window,
-            event_handle::get_image_base64,
             event_handle::screenps,
         ])
         .on_system_tray_event(event_handle::tray_event_handler)
