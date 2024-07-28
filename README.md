@@ -2,7 +2,7 @@
 
 基于PaddleOCR-json的截图OCR工具
 
-## images
+### images
 
 ![设置](images/setting.png)
 
@@ -25,3 +25,8 @@ pnpm run tauri dev
 ```bash
 pnpm run tauri build
 ```
+
+### Thanks
+
+* [tosa](https://github.com/danger-dream/tosa)
+* [PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json)
