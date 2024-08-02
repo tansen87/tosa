@@ -6,15 +6,15 @@ authors = [""]
 license = "MIT"
 repository = ""
 edition = "2021"
-rust-version = "1.76.0"
+rust-version = "1.79.0"
 
 [build-dependencies]
-tauri-build = { version = "1.5.1", features = [] }
+tauri-build = { version = "1.5.3", features = [] }
 
 [dependencies]
 paddleocr = "0.4.1"
 window-shadows = "0.2.2"
-tauri = { version = "1.5.4", features = [
+tauri = { version = "1.7.1", features = [
 	"dialog-all",
 	"clipboard-all",
 	"os-all",
@@ -29,7 +29,7 @@ tauri = { version = "1.5.4", features = [
 	"reqwest-client",
 	"system-tray",
 ] }
-tauri-plugin-context-menu = "0.7.0"
+tauri-plugin-context-menu = "0.8.0"
 tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-positioner = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
@@ -42,12 +42,12 @@ dirs = "5.0.1"
 once_cell = "1.19.0"
 log = "0.4.20"
 mouse_position = "0.1.3"
-image = "0.24"
-base64 = "0.21"
+image = "0.25.2"
+base64 = "0.22.1"
 lazy_static = "1"
 
 [target.'cfg(windows)'.dependencies]
-windows = { version = "0.52.0", features = [
+windows = { version = "0.58.0", features = [
 	"Win32_UI_WindowsAndMessaging",
 	"Win32_Foundation",
 	"Win32_System_Threading",
