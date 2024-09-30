@@ -1,5 +1,5 @@
 use crate::{
-    config::get_or_bool, global::*, hotkey, window::*,
+    config::get_or_bool, global::*, hotkey, window::*, PP_OCR,
 };
 use base64::{engine::general_purpose, Engine as _};
 use log::debug;
@@ -72,16 +72,14 @@ pub fn screenshot(name: &str) {
 
 #[tauri::command]
 pub async fn screenps(clip: String) -> String {
-    let mut p = paddleocr::Ppocr::new(
-        std::path::PathBuf::from("PaddleOCR-json/PaddleOCR-json.exe"),
-        Default::default(),
-    ).unwrap();
-
-    let json_data = match (async { p.ocr(paddleocr::ImageData::from_base64(clip)) }).await {
+    let json_data = match tauri::async_runtime::spawn_blocking(move || {
+        let mut pp_ocr = PP_OCR.lock().unwrap();
+        pp_ocr.ocr(paddleocr::ImageData::from_base64(clip))
+    }).await.unwrap() {
         Ok(res) => res,
         Err(err) => {
-            eprintln!("ocr error: {err}");
-            err.to_string()
+            eprintln!("OCR error: {err}");
+            return err.to_string();
         }
     };
 

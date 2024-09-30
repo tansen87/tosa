@@ -12,6 +12,16 @@ mod window;
 
 use log::info;
 use tauri::Manager;
+use lazy_static::lazy_static;
+
+lazy_static! {
+    static ref PP_OCR: std::sync::Arc<std::sync::Mutex<paddleocr::Ppocr>> = {
+        let exe_path = std::path::PathBuf::from("PaddleOCR-json/PaddleOCR-json.exe");
+        let p = paddleocr::Ppocr::new(exe_path, Default::default())
+            .expect("Failed to initialize Ppocr engine");
+        std::sync::Arc::new(std::sync::Mutex::new(p))
+    };
+}
 
 fn main() {
     tauri::Builder::default()
