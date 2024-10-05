@@ -9,12 +9,12 @@ edition = "2021"
 rust-version = "1.79.0"
 
 [build-dependencies]
-tauri-build = { version = "1.5.3", features = [] }
+tauri-build = { version = "1.5.5", features = [] }
 
 [dependencies]
 paddleocr = "0.4.1"
 window-shadows = "0.2.2"
-tauri = { version = "1.7.1", features = [
+tauri = { version = "1.8.0", features = [
 	"dialog-all",
 	"clipboard-all",
 	"os-all",

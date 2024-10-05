@@ -47,7 +47,7 @@ async function onToggleAutoStart(v) {
 				<ElCheckbox v-model="isAutoStart" @change="onToggleAutoStart">开机自启动</ElCheckbox>
 			</ElFormItem>
 			<div class="text-[#a1a1a1] text-wrap mt-1 ml-[250px] mb-4 leading-4">
-				快捷键必须包含Ctrl、Alt、Shift中的至少一个，且不能与其他软件冲突。
+				快捷键必须包含Ctrl、Alt、Shift中的至少一个,且不能与其他软件冲突。
 			</div>
 			<el-form-item label="截图识别:">
 				<HotkeyInput v-model="conf.screenshot_recognizer" />
@@ -68,7 +68,7 @@ async function onToggleAutoStart(v) {
 				</div>
 			</el-form-item> -->
 
-			<el-form-item label="图片识别方式">
+			<!-- <el-form-item label="图片识别方式">
 				<ElCheckbox v-model="conf.ocr_succed_show_win">图片识别成功才显示窗口</ElCheckbox>
 				<div class="item-tip">
 					<p>开启后，只有当图片识别成功时，才会显示窗口。</p>
@@ -76,7 +76,7 @@ async function onToggleAutoStart(v) {
 				</div>
 				<ElCheckbox v-model="conf.ocr_err_tip">图片识别错误提示</ElCheckbox>
 				<div class="item-tip">开启后，图片识别失败时会弹框提示错误原因</div>
-			</el-form-item>
+			</el-form-item> -->
 
 			<!-- <el-form-item label="复制结果">
 				<ElCheckbox v-model="conf.auto_copy">自动复制图片识别结果到剪切板</ElCheckbox>
