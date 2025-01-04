@@ -6,7 +6,7 @@
 		"distDir": "../dist"
 	},
 	"package": {
-		"productName": "Tosa",
+		"productName": "local-ocr",
 		"version": "0.1.0"
 	},
 	"tauri": {

@@ -1,5 +1,5 @@
 [package]
-name = "tosa"
+name = "local-ocr"
 version = "0.1.0"
 description = "OCR"
 authors = [""]

@@ -1,4 +1,4 @@
-# Tosa (An application based on PaddleOCR-json)
+# local-ocr (An application based on PaddleOCR-json)
 
 基于PaddleOCR-json的截图OCR工具
 

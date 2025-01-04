@@ -2549,6 +2549,33 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "78b3ae25bc7c8c38cec158d1f2757ee79e9b3740fbc7ccf0e59e4b08d793fa89"
 
 [[package]]
+name = "local-ocr"
+version = "0.1.0"
+dependencies = [
+ "base64 0.22.1",
+ "dirs 5.0.1",
+ "image 0.25.2",
+ "lazy_static",
+ "log",
+ "mouse_position",
+ "once_cell",
+ "paddleocr",
+ "screenshots",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-autostart",
+ "tauri-plugin-context-menu",
+ "tauri-plugin-log",
+ "tauri-plugin-positioner",
+ "tauri-plugin-single-instance",
+ "tauri-plugin-store",
+ "window-shadows",
+ "windows 0.58.0",
+]
+
+[[package]]
 name = "lock_api"
 version = "0.4.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5265,33 +5292,6 @@ dependencies = [
  "serde_spanned",
  "toml_datetime",
  "winnow 0.6.20",
-]
-
-[[package]]
-name = "tosa"
-version = "0.1.0"
-dependencies = [
- "base64 0.22.1",
- "dirs 5.0.1",
- "image 0.25.2",
- "lazy_static",
- "log",
- "mouse_position",
- "once_cell",
- "paddleocr",
- "screenshots",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-autostart",
- "tauri-plugin-context-menu",
- "tauri-plugin-log",
- "tauri-plugin-positioner",
- "tauri-plugin-single-instance",
- "tauri-plugin-store",
- "window-shadows",
- "windows 0.58.0",
 ]
 
 [[package]]
